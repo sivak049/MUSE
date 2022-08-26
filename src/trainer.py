@@ -198,7 +198,7 @@ class Trainer(object):
         if new_lr < old_lr:
             logger.info("Decreasing learning rate: %.8f -> %.8f" % (old_lr, new_lr))
             self.map_optimizer.param_groups[0]['lr'] = new_lr
-        """
+            
         if self.params.lr_shrink < 1 and to_log[metric] >= -1e7:
             if to_log[metric] < self.best_valid_metric:
                 logger.info("Validation metric is smaller than the best: %.5f vs %.5f"
@@ -211,7 +211,7 @@ class Trainer(object):
                     logger.info("Shrinking the learning rate: %.5f -> %.5f"
                                 % (old_lr, self.map_optimizer.param_groups[0]['lr']))
                 self.decrease_lr = True
-        """        
+                
 
     def save_best(self, to_log, metric):
         """

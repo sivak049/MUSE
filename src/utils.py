@@ -56,7 +56,8 @@ def initialize_exp(params):
             torch.cuda.manual_seed(params.seed)
 
     # dump parameters
-    params.exp_path = get_exp_path(params)
+    #params.exp_path = get_exp_path(params)
+    params.exp_path = r'C:\Users\Siva\Vaagish\University_of_Minnesota\Semesters\Oshkaabewis_Native_Journals\sa_fasttext\MUSE\dumped'
     with io.open(os.path.join(params.exp_path, 'params.pkl'), 'wb') as f:
         pickle.dump(params, f)
 
@@ -215,27 +216,27 @@ def get_optimizer(s):
         raise Exception('Unknown optimization method: "%s"' % method)
 
     # check that we give good parameters to the optimizer
-    expected_args = inspect.getargspec(optim_fn.__init__)[0]
-    assert expected_args[:2] == ['self', 'params']
-    if not all(k in expected_args[2:] for k in optim_params.keys()):
-        raise Exception('Unexpected parameters: expected "%s", got "%s"' % (
-            str(expected_args[2:]), str(optim_params.keys())))
+    #expected_args = inspect.getargspec(optim_fn.__init__)[0]
+    #assert expected_args[:2] == ['self', 'params']
+    #if not all(k in expected_args[2:] for k in optim_params.keys()):
+    #    raise Exception('Unexpected parameters: expected "%s", got "%s"' % (
+    #        str(expected_args[2:]), str(optim_params.keys())))
 
     return optim_fn, optim_params
 
 
 def get_exp_path(params):
     """
-    Create a directory to store the experiment.
+    #Create a directory to store the experiment.
     """
     # create the main dump path if it does not exist
     exp_folder = MAIN_DUMP_PATH if params.exp_path == '' else params.exp_path
     if not os.path.exists(exp_folder):
-        subprocess.Popen("mkdir %s" % exp_folder, shell=True).wait()
+        subprocess.Popen('mkdir %s' % exp_folder, shell=True).wait()
     assert params.exp_name != ''
     exp_folder = os.path.join(exp_folder, params.exp_name)
     if not os.path.exists(exp_folder):
-        subprocess.Popen("mkdir %s" % exp_folder, shell=True).wait()
+        subprocess.Popen('mkdir %s' % exp_folder, shell=True).wait()
     if params.exp_id == '':
         chars = 'abcdefghijklmnopqrstuvwxyz0123456789'
         while True:
@@ -248,7 +249,7 @@ def get_exp_path(params):
         assert not os.path.isdir(exp_path), exp_path
     # create the dump folder
     if not os.path.isdir(exp_path):
-        subprocess.Popen("mkdir %s" % exp_path, shell=True).wait()
+        subprocess.Popen('mkdir %s' % exp_path, shell=True).wait()
     return exp_path
 
 

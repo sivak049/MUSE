@@ -56,8 +56,8 @@ def initialize_exp(params):
             torch.cuda.manual_seed(params.seed)
 
     # dump parameters
-    #params.exp_path = get_exp_path(params)
-    params.exp_path = r'C:\Users\Siva\Vaagish\University_of_Minnesota\Semesters\Oshkaabewis_Native_Journals\sa_fasttext\MUSE\dumped'
+    params.exp_path = get_exp_path(params)
+    #params.exp_path = r'C:\Users\Siva\Vaagish\University_of_Minnesota\Semesters\Oshkaabewis_Native_Journals\sa_fasttext\MUSE\dumped'
     with io.open(os.path.join(params.exp_path, 'params.pkl'), 'wb') as f:
         pickle.dump(params, f)
 

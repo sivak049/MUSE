@@ -141,7 +141,7 @@ if params.adversarial:
 
         # JSON log / save best model / end of epoch
         logger.info("__log__:%s" % json.dumps(to_log))
-        trainer.save_best(to_log, VALIDATION_METRIC)
+        #trainer.save_best(to_log, VALIDATION_METRIC)
         logger.info('End of epoch %i.\n\n' % n_epoch)
 
         # update the learning rate (stop if too small)

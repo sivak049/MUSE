@@ -136,8 +136,8 @@ if params.adversarial:
 
         # embeddings / discriminator evaluation
         to_log = OrderedDict({'n_epoch': n_epoch})
-        evaluator.all_eval(to_log)
-        evaluator.eval_dis(to_log)
+        #evaluator.all_eval(to_log)
+        #evaluator.eval_dis(to_log)
 
         # JSON log / save best model / end of epoch
         logger.info("__log__:%s" % json.dumps(to_log))
@@ -145,6 +145,7 @@ if params.adversarial:
         logger.info('End of epoch %i.\n\n' % n_epoch)
 
         # update the learning rate (stop if too small)
+        #TODO: shrink omit
         trainer.update_lr(to_log, VALIDATION_METRIC)
         if trainer.map_optimizer.param_groups[0]['lr'] < params.min_lr:
             logger.info('Learning rate < 1e-6. BREAK.')
@@ -172,7 +173,7 @@ if params.n_refinement > 0:
 
         # embeddings evaluation
         to_log = OrderedDict({'n_iter': n_iter})
-        evaluator.all_eval(to_log)
+        #evaluator.all_eval(to_log)
 
         # JSON log / save best model / end of epoch
         logger.info("__log__:%s" % json.dumps(to_log))

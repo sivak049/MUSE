@@ -90,7 +90,7 @@ def get_word_translation_accuracy(lang1, word2id1, emb1, lang2, word2id2, emb2, 
     """
     if dico_eval == 'default':
         #path = os.path.join(DIC_EVAL_PATH, '%s-%s.5000-6500.txt' % (lang1, lang2))
-        path = '/data/crosslingual/dictionaries/ta-en.5000-6500.txt'
+        path = '/content/MUSE/data/crosslingual/dictionaries/ta-en.5000-6500.txt'
     else:
         path = dico_eval
     dico = load_dictionary(path, word2id1, word2id2)

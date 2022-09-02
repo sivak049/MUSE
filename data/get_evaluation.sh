@@ -13,7 +13,7 @@ europarl='http://www.statmt.org/europarl/v7'
 declare -A wordsim_lg
 wordsim_lg=(["en"]="EN_MC-30.txt EN_MTurk-287.txt EN_RG-65.txt EN_VERB-143.txt EN_WS-353-REL.txt EN_YP-130.txt EN_MEN-TR-3k.txt EN_MTurk-771.txt EN_RW-STANFORD.txt EN_SIMLEX-999.txt EN_WS-353-ALL.txt EN_WS-353-SIM.txt" ["es"]="ES_MC-30.txt ES_RG-65.txt ES_WS-353.txt" ["de"]="DE_GUR350.txt DE_GUR65.txt DE_SIMLEX-999.txt DE_WS-353.txt DE_ZG222.txt" ["fr"]="FR_RG-65.txt" ["it"]="IT_SIMLEX-999.txt IT_WS-353.txt")
 
-mkdir monolingual crosslingual
+mkdir monolingual ## crosslingual
 
 ## English word analogy task
 curl -Lo source-archive.zip $en_analogy
@@ -23,34 +23,34 @@ rm source-archive.zip
 
 
 ## Downloading en-{} or {}-en dictionaries
-lgs="af ar bg bn bs ca cs da de el en es et fa fi fr he hi hr hu id it ja ko lt lv mk ms nl no pl pt ro ru sk sl sq sv ta th tl tr uk vi zh"
-mkdir -p crosslingual/dictionaries/
-for lg in ${lgs}
-do
-  for suffix in .txt .0-5000.txt .5000-6500.txt
-  do
-    fname=en-$lg$suffix
-    curl -Lo crosslingual/dictionaries/$fname $dl_path/dictionaries/$fname
-    fname=$lg-en$suffix
-    curl -Lo crosslingual/dictionaries/$fname $dl_path/dictionaries/$fname
-  done
-done
+#lgs="af ar bg bn bs ca cs da de el en es et fa fi fr he hi hr hu id it ja ko lt lv mk ms nl no pl pt ro ru sk sl sq sv ta th tl tr uk vi zh"
+#mkdir -p crosslingual/dictionaries/
+#for lg in ${lgs}
+#do
+#  for suffix in .txt .0-5000.txt .5000-6500.txt
+#  do
+#    fname=en-$lg$suffix
+#    curl -Lo crosslingual/dictionaries/$fname $dl_path/dictionaries/$fname
+#    fname=$lg-en$suffix
+#    curl -Lo crosslingual/dictionaries/$fname $dl_path/dictionaries/$fname
+#  done
+#done
 
 ## Download European dictionaries
-for src_lg in de es fr it pt
-do
-  for tgt_lg in de es fr it pt
-  do
-    if [ $src_lg != $tgt_lg ]
-    then
-      for suffix in .txt .0-5000.txt .5000-6500.txt
-      do
-        fname=$src_lg-$tgt_lg$suffix
-        curl -Lo crosslingual/dictionaries/$fname $dl_path/dictionaries/$fname
-      done
-    fi
-  done
-done
+#for src_lg in de es fr it pt
+#do
+#  for tgt_lg in de es fr it pt
+#  do
+#    if [ $src_lg != $tgt_lg ]
+#    then
+#      for suffix in .txt .0-5000.txt .5000-6500.txt
+#      do
+#        fname=$src_lg-$tgt_lg$suffix
+#        curl -Lo crosslingual/dictionaries/$fname $dl_path/dictionaries/$fname
+#      done
+#    fi
+#  done
+#done
 
 ## Download Dinu et al. dictionaries
 for fname in OPUS_en_it_europarl_train_5K.txt OPUS_en_it_europarl_test.txt

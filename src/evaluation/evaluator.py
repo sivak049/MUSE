@@ -17,6 +17,8 @@ from . import load_europarl_data, get_sent_translation_accuracy
 from ..dico_builder import get_candidates, build_dictionary
 from src.utils import get_idf
 
+COUNT_METRIC_NAME = "count_metric"
+metric_count = 0
 
 logger = getLogger()
 
@@ -173,6 +175,10 @@ class Evaluator(object):
             )
             to_log.update([('src_to_tgt_%s-%s' % (k, method), v) for k, v in results])
 
+    def metric_count_function(self, to_log):
+        global metric_count
+        to_log[COUNT_METRIC] = metric_count
+        
     def dist_mean_cosine(self, to_log):
         """
         Mean-cosine model selection criterion.

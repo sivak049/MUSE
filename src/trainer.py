@@ -13,6 +13,8 @@ import torch
 from torch.autograd import Variable
 from torch.nn import functional as F
 
+import pickle
+
 from .utils import get_optimizer, load_embeddings, normalize_embeddings, export_embeddings
 from .utils import clip_parameters
 from .dico_builder import build_dictionary
@@ -247,6 +249,30 @@ class Trainer(object):
         """
         params = self.params
 
+        # load all embeddings
+        logger.info("Reloading all embeddings for mapping ...")
+        params.src_dico, src_emb = load_embeddings(params, source=True, full_vocab=True)
+        params.tgt_dico, tgt_emb = load_embeddings(params, source=False, full_vocab=True)
+
+        # apply same normalization as during training
+        normalize_embeddings(src_emb, params.normalize_embeddings, mean=params.src_mean)
+        normalize_embeddings(tgt_emb, params.normalize_embeddings, mean=params.tgt_mean)
+
+        # map source embeddings to the target space
+        bs = 4096
+        logger.info("Map source embeddings to the target space ...")
+        for i, k in enumerate(range(0, len(src_emb), bs)):
+            x = Variable(src_emb[k:k + bs], volatile=True)
+            src_emb[k:k + bs] = self.mapping(x.cuda() if params.cuda else x).data.cpu()
+
+        # write embeddings to the disk
+        export_embeddings(src_emb, tgt_emb, params)
+        
+     
+    def export_standalone(params_filepath):
+        filehandler = open(params_filepath, 'r')
+        params = pickle.load(filehandler)
+        
         # load all embeddings
         logger.info("Reloading all embeddings for mapping ...")
         params.src_dico, src_emb = load_embeddings(params, source=True, full_vocab=True)

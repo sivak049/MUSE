@@ -16,10 +16,14 @@ import torch
 from src.utils import bool_flag, initialize_exp
 from src.models import build_model
 from src.trainer import Trainer
-from src.evaluation import Evaluator
+from src.evaluation import Evaluator, COUNT_METRIC_NAME
 
 
-VALIDATION_METRIC = 'mean_cosine-csls_knn_10-S2T-10000'
+# old metric
+# VALIDATION_METRIC = 'mean_cosine-csls_knn_10-S2T-10000'
+
+# our "most recent" metric
+VALIDATION_METRIC = COUNT_METRIC_NAME
 
 
 # main

@@ -177,7 +177,7 @@ class Evaluator(object):
 
     def metric_count_function(self, to_log):
         global metric_count
-        to_log[COUNT_METRIC] = metric_count
+        to_log[COUNT_METRIC_NAME] = metric_count
         
     def dist_mean_cosine(self, to_log):
         """

@@ -29,7 +29,7 @@ parser.add_argument("--exp_path", type=str, default="", help="Where to store exp
 parser.add_argument("--exp_name", type=str, default="debug", help="Experiment name")
 parser.add_argument("--exp_id", type=str, default="", help="Experiment ID")
 parser.add_argument("--cuda", type=bool_flag, default=True, help="Run on GPU")
-parser.add_argument("--export", type=str, default="pth", help="Export embeddings after training (txt / pth)")
+parser.add_argument("--export", type=str, default="txt", help="Export embeddings after training (txt / pth)")
 
 # data
 parser.add_argument("--src_lang", type=str, default='en', help="Source language")

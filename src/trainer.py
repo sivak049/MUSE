@@ -249,8 +249,8 @@ class Trainer(object):
 
         # load all embeddings
         logger.info("Reloading all embeddings for mapping ...")
-        params.src_dico, src_emb = load_embeddings(params, source=True, full_vocab=True)
-        params.tgt_dico, tgt_emb = load_embeddings(params, source=False, full_vocab=True)
+        params.src_dico, src_emb = load_embeddings(params, source=True, full_vocab=False)
+        params.tgt_dico, tgt_emb = load_embeddings(params, source=False, full_vocab=False)
 
         # apply same normalization as during training
         normalize_embeddings(src_emb, params.normalize_embeddings, mean=params.src_mean)
